@@ -1,0 +1,38 @@
+{
+  "name": "richardhj/contao-epost-writer",
+  "description": "Writer for the E-POSTBUSINESS API integration for Contao Open Source CMS",
+  "type": "contao-module",
+  "authors": [
+    {
+      "name": "Richard Henkenjohann",
+      "email": "richard@henkenjohann.me",
+      "homepage": "http://henkenjohann.me",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "richard@henkenjohann.me"
+  },
+  "require": {
+    "php": "^5.4 || ^7.0",
+    "avisota/core": "~1.2",
+    "contaoblackforest/contao-doctrine-orm": "~2.3",
+    "friends-of-contao/contao-associategroups": "~1.3",
+    "richardhj/contao-epost-core": "*",
+    "symfony/http-foundation": "~2.7",
+    "terminal42/contao-tablelookupwizard": "~3.2"
+  },
+  "autoload": {
+    "psr-0": {
+      "EPost\\": "src/"
+    }
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "module": "system/modules/epost-writer",
+        "assets": "assets/epost/writer"
+      }
+    }
+  }
+}

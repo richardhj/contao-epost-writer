@@ -1,0 +1,72 @@
+<div id="tl_buttons">
+    <a href="<?php echo $this->getReferer(true); ?>" class="header_back" title="<?php echo $this->backBT; ?>"
+       accesskey="b" onclick="Backend.getScrollOffset();">
+        <?php echo $GLOBALS['TL_LANG']['MSC']['backBT'] ?>
+    </a>
+</div>
+
+<h2 class="sub_headline"><?= $GLOBALS['TL_LANG']['epost_outbox']['headline'] ?></h2>
+
+<?= $this->messages ?>
+
+<?php if (true === $this->execute): ?>
+    <div class="tl_listing_container initializing" id="epost_outbox">
+        <div class="epost_outbox_instruction">
+            <div class="epost_progress_initializing"><img
+                    src="system/modules/epost-writer/assets/images/queue_execute_initialize.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_initializing'] ?>
+            </div>
+            <div class="epost_progress_running"><img
+                    src="system/modules/epost-writer/assets/images/queue_execute_send.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_running'] ?>
+            </div>
+            <div class="epost_progress_pause"><img
+                    src="system/modules/epost-writer/assets/images/queue_execute_waiting.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_pause'] ?>
+            </div>
+            <div class="epost_progress_finish"><?= $GLOBALS['TL_LANG']['epost_outbox']['progress_finish'] ?></div>
+            <div class="epost_progress_error"><?= $GLOBALS['TL_LANG']['epost_outbox']['progress_error'] ?></div>
+        </div>
+
+        <div id="epost_outbox_exception">
+            <div id="epost_outbox_exception_text"></div>
+        </div>
+
+        <div class="epost_outbox_stats">
+            <div class="failed">
+                <span id="epost_outbox_execution_failed">0</span>
+                <label><?= $GLOBALS['TL_LANG']['epost_outbox']['col_failed'] ?></label>
+            </div>
+            <div class="success">
+                <span id="epost_outbox_execution_success">0</span>
+                <label><?= $GLOBALS['TL_LANG']['epost_outbox']['col_success'] ?></label>
+            </div>
+            <div class="open">
+                <span id="epost_outbox_execution_open"><?= $this->queue->length() ?></span>
+                <label><?= $GLOBALS['TL_LANG']['epost_outbox']['col_open'] ?></label>
+            </div>
+            <div class="timeout">
+                <span id="epost_outbox_execution_timeout">0:00</span>
+                <label><?= $GLOBALS['TL_LANG']['epost_outbox']['col_timeout'] ?></label>
+            </div>
+            <div class="duration">
+                <span id="epost_outbox_execution_duration">0:00:00</span>
+                <label><?= $GLOBALS['TL_LANG']['epost_outbox']['col_duration'] ?></label>
+            </div>
+        </div>
+
+        <div class="epost_outbox_progress">
+            <div id="epost_outbox_progress_failed" class="progress-bar progress-bar-failed" role="progressbar"
+                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+            <div id="epost_outbox_progress_success" class="progress-bar progress-bar-success" role="progressbar"
+                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+            <div id="epost_outbox_progress_working" class="progress-bar progress-bar-open" role="progressbar"
+                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+        </div>
+    </div>
+
+    <script>window.addEvent('load', function () {
+            new Outbox(<?= $this->queue->length() ?>, <?= $this->queue_maxSendTime ?>, <?= $this->queue_cyclePause ?>);
+        });</script>
+<?php else: ?>
+
+    <p class="tl_message"><?= $this->outbox_introduction ?><br><br></p>
+
+<?php endif ?>

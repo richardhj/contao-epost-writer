@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Template used for rendering the letter contents of a E-POST letter created in the Open Source CMS Contao.
+ * Adjust this template by observing the guidelines in the E-POST Send Reference (chapter 6)
+ */
+
+
+// A toggle to visualize the template's measures by giving them a background color
+$debug = false;
+
+?>
+
+<div style="font-size: 72.5%; font-family: Helvetica, sans-serif; float:left;">
+    <table cellspacing="0" cellpadding="0" border="0" width="100%"
+           style="<?= $debug ? ' background-color:#eee' : '' ?>">
+        <tr style="<?= $debug ? ' background-color:#ddd' : '' ?>">
+            <td>&nbsp;</td>
+            <td height="35mm">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="8mm" style="<?= $debug ? ' background-color:#aaa' : '' ?>">&nbsp;</td>
+            <td height="9mm" width="85mm"><?= $this->senderParsed ?></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="<?= $debug ? ' background-color:#aaa' : '' ?>">&nbsp;</td>
+            <td height="17mm" style="<?= $debug ? ' background-color:#f00' : '' ?>">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="<?= $debug ? ' background-color:#aaa' : '' ?>">&nbsp;</td>
+            <td height="19mm" style="font-size: 10pt;"><?= $this->recipientParsed ?></td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+    <table cellspacing="0" cellpadding="0" border="0" width="100%"
+           style="<?= $debug ? ' background-color:#dedede' : '' ?>">
+        <tr>
+            <td width="8mm">&nbsp;</td>
+            <td width="165mm" style="font-size: 11pt"><?php echo $this->content; ?></td>
+        </tr>
+    </table>
+
+</div>

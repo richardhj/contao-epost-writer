@@ -1,0 +1,10 @@
+<?php
+/** @var EPost\Api\Metadata\Envelope\Recipient\Hybrid|EPost\Api\Metadata\Envelope\AbstractRecipient $recipient */
+$recipient = $this->recipient;
+
+if ($recipient->getCompany()): ?><?= $recipient->getCompany() ?><br><? endif ?>
+<?= $recipient->getFirstName() ?> <?= $recipient->getLastName() ?><br>
+<?= $recipient->getZipCode() ?> <?= $recipient->getStreetName() ?><? if (strlen(
+    $recipient->getHouseNumber()
+)): ?> <?= $recipient->getHouseNumber() ?><? endif ?>
+{if sender_company==""}##sender_firstName## ##sender_lastName##{else}##sender_company##{endif}, ##sender_streetName##{if sender_houseNumber==""}{else} ##sender_houseNumber##{endif}, ##sender_zipCode## ##sender_city##
