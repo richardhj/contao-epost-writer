@@ -15,13 +15,13 @@ array_insert(
     [
         'epost_writer' => [
             'tables'      => [EPost\Model\Letter::getTable(), EPost\Model\LetterContent::getTable()],
-            'icon'        => 'system/modules/epost-writer/assets/images/writer.png',
+            'icon'        => 'assets/epost/writer/images/writer.png',
             'stylesheet'  => 'assets/epost/writer/css/backend.css',
             'send_letter' => ['EPost\Dca\Writer', 'sendLetter'],
         ],
         'epost_outbox' => [
             'callback'   => 'EPost\Backend\Outbox',
-            'icon'       => 'system/modules/epost-writer/assets/images/outbox.png',
+            'icon'       => 'assets/epost/writer/images/outbox.png',
             'stylesheet' => 'assets/epost/writer/css/backend.css',
         ],
     ]
@@ -29,7 +29,7 @@ array_insert(
 
 $GLOBALS['BE_MOD']['epost']['epost_templates'] = [
     'tables'     => [EPost\Model\Template::getTable()],
-    'icon'       => 'system/modules/epost-writer/assets/images/templates.png',
+    'icon'       => 'assets/epost/writer/images/templates.png',
     'stylesheet' => 'assets/epost/writer/css/backend.css',
     'nested'     => 'epost_config',
 ];

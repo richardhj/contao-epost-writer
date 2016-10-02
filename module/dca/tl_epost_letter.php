@@ -89,7 +89,7 @@ $GLOBALS['TL_DCA'][$table] = [
             'send_letter' => [
                 'label'      => &$GLOBALS['TL_LANG'][$table]['send_letter'],
                 'href'       => 'key=send_letter',
-                'icon'       => 'assets/epost/writer/images/outbox.png',
+                'icon'       => 'assets/epost/writer/images/send_letter.png',
                 'attributes' => 'onclick="Backend.getScrollOffset()"',
             ],
         ],

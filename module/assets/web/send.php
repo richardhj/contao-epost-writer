@@ -34,6 +34,7 @@ if (!is_file($dir.'/system/initialize.php')) {
 }
 
 define('TL_MODE', 'BE');
+/** @noinspection PhpIncludeInspection */
 require($dir.'/system/initialize.php');
 
 BackendUser::getInstance();

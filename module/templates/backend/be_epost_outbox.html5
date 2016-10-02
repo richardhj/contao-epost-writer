@@ -13,13 +13,13 @@
     <div class="tl_listing_container initializing" id="epost_outbox">
         <div class="epost_outbox_instruction">
             <div class="epost_progress_initializing"><img
-                    src="system/modules/epost-writer/assets/images/queue_execute_initialize.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_initializing'] ?>
+                    src="assets/epost/writer/images/queue_execute_initialize.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_initializing'] ?>
             </div>
             <div class="epost_progress_running"><img
-                    src="system/modules/epost-writer/assets/images/queue_execute_send.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_running'] ?>
+                    src="assets/epost/writer/images/queue_execute_send.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_running'] ?>
             </div>
             <div class="epost_progress_pause"><img
-                    src="system/modules/epost-writer/assets/images/queue_execute_waiting.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_pause'] ?>
+                    src="assets/epost/writer/images/queue_execute_waiting.gif"> <?= $GLOBALS['TL_LANG']['epost_outbox']['progress_pause'] ?>
             </div>
             <div class="epost_progress_finish"><?= $GLOBALS['TL_LANG']['epost_outbox']['progress_finish'] ?></div>
             <div class="epost_progress_error"><?= $GLOBALS['TL_LANG']['epost_outbox']['progress_error'] ?></div>
