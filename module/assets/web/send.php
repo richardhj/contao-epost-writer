@@ -99,11 +99,6 @@ class send extends \Backend
         $messageTemplate = new EPostTemplate();
         $additionalData = [];
 
-//        $additionalData += [
-//            'attachments' => $message->getAttachments()
-//        ];
-
-
         $additionalData += [
             'letter' => $message,
         ];
@@ -159,9 +154,8 @@ class send extends \Backend
                 http_build_query($parameters)
             );
 
-//            $message->setSendOn(new \DateTime());
-//            $entityManager->persist($message);
-//            $entityManager->flush();
+            $message->sent = time();
+            $message->save();
         }
 
         echo '<html><head><meta http-equiv="refresh" content="0; URL='.$url.'"></head><body>Still generating...</body></html>';

@@ -13,7 +13,7 @@
  * @filesource
  */
 
-function initialize()
+function init()
 {
     $dir = dirname(isset($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : __FILE__);
 
@@ -36,7 +36,7 @@ function initialize()
     \BackendUser::getInstance();
 }
 
-initialize();
+init();
 
 $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
 $runner = new \EPost\AvisotaBridge\Controller\QueueExecuteController();

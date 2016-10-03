@@ -10,6 +10,7 @@
 
 
 $table = EPost\Model\LetterContent::getTable();
+/** @noinspection PhpUndefinedMethodInspection */
 $table2 = ContentModel::getTable();
 Controller::loadDataContainer($table2);
 Controller::loadLanguageFile($table2);

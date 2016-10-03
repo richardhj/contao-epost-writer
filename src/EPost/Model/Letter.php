@@ -14,6 +14,7 @@ use Contao\Model;
 
 /**
  * Class Letter
+ * @property int    $sent
  * @property string $title
  * @property int    $template
  * @property int    $sender

@@ -13,8 +13,8 @@ namespace EPost\AvisotaBridge\RecipientSource;
 
 use Avisota\Recipient\RecipientInterface;
 use Avisota\RecipientSource\RecipientSourceInterface;
-use EPost\Api\Metadata\Envelope\Recipient\Hybrid;
 use EPost\AvisotaBridge\Recipient\EPostDelegate;
+use EPost\Helper\HybridRecipientFactory;
 
 
 class EPostWriter implements RecipientSourceInterface
@@ -56,7 +56,7 @@ class EPostWriter implements RecipientSourceInterface
         if (empty($this->set)) {
             foreach ($this->memberIds as $memberId) {
                 $model = \MemberModel::findByPk($memberId);
-                $recipient = Hybrid::createFromModel($model);
+                $recipient = HybridRecipientFactory::createFromModel($model);
 
                 $this->set[] = EPostDelegate::createForOrigin($recipient);
             }

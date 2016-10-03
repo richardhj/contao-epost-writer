@@ -17,6 +17,9 @@ class Config
     const CONFIG_PREFIX = 'epost_';
 
 
+    const WRITER_ATTACHMENTS_PATH = '';
+
+
     const QUEUE_MAX_SEND_TIME = 'queue:maxSendTime';
 
 

@@ -9,6 +9,8 @@
  */
 
 
+use EPost\Helper\Config as EPostConfig;
+use EPost\Model\Letter;
 use EPost\Model\Template;
 
 
@@ -23,11 +25,25 @@ $GLOBALS['TL_DCA'][$table] = [
 
     // Config
     'config'          => [
-        'dataContainer'    => 'Table',
-        'ctable'           => [EPost\Model\LetterContent::getTable()],
-        'switchToEdit'     => true,
-        'enableVersioning' => true,
-        'sql'              => [
+        'dataContainer'     => 'Table',
+        'ctable'            => [EPost\Model\LetterContent::getTable()],
+        'switchToEdit'      => true,
+        'enableVersioning'  => true,
+        'onsubmit_callback' => [
+            function (\DataContainer $dc) {
+                $model = Letter::findByPk($dc->id);
+                $attachments = deserialize($model->attachments);
+
+                foreach (deserialize($model->attachments_upload, true) as $path) {
+                    $attachments[] = Dbafs::addResource($path)->uuid;
+                }
+
+                $model->attachments = serialize($attachments);
+                $model->attachments_uplaod = '';
+                $model->save();
+            },
+        ],
+        'sql'               => [
             'keys' => [
                 'id' => 'primary',
             ],
@@ -107,16 +123,21 @@ $GLOBALS['TL_DCA'][$table] = [
     // MetaPalettes
     'metapalettes'    => [
         'default' => [
-            'title'      => [
+            'title'       => [
                 'title',
-            ],
-            'config'     => [
                 'template',
             ],
-            'recipients' => [
+//            'config'      => [
+//            ],
+            'recipients'  => [
+                'recipients_member',
                 'send_to_member_group',
-                'send_to_member',
+//                'send_to_member',
 //                'exclude_members',
+            ],
+            'attachments' => [
+                'attachments_upload',
+                'attachments',
             ],
         ],
     ],
@@ -126,9 +147,9 @@ $GLOBALS['TL_DCA'][$table] = [
         'send_to_member_group' => [
             'recipients_member_group',
         ],
-        'send_to_member'       => [
-            'recipients_member',
-        ],
+//        'send_to_member'       => [
+//            'recipients_member',
+//        ],
     ],
 
     // Fields
@@ -139,6 +160,9 @@ $GLOBALS['TL_DCA'][$table] = [
             'sql'    => "int(10) unsigned NOT NULL auto_increment",
         ],
         'tstamp'                  => [
+            'sql' => "int(10) unsigned NOT NULL default '0'",
+        ],
+        'sent'                    => [
             'sql' => "int(10) unsigned NOT NULL default '0'",
         ],
         'title'                   => [
@@ -230,5 +254,38 @@ $GLOBALS['TL_DCA'][$table] = [
                 'type'  => 'hasMany',
             ],
         ],
+        'attachments'             => [
+            'label'     => &$GLOBALS['TL_LANG'][$table]['attachments'],
+            'exclude'   => true,
+            'inputType' => 'fileTree',
+            'eval'      => [
+                'tl_class'  => 'clr',
+                'multiple'  => true,
+                'files'     => true,
+                'filesOnly' => true,
+                'fieldType' => 'checkbox',
+            ],
+            'sql'       => "blob NULL",
+        ],
+        'attachments_upload'      => [
+            'label'     => &$GLOBALS['TL_LANG'][$table]['attachments_upload'],
+            'exclude'   => true,
+            'inputType' => 'fileUpload',
+            'eval'      => [
+                'tl_class'     => 'w50',
+                'uploadFolder' => EPostConfig::get(EPostConfig::WRITER_ATTACHMENTS_PATH)
+                    ? FilesModel::findByPk(EPostConfig::get(EPostConfig::WRITER_ATTACHMENTS_PATH))->path
+                    : null,
+            ],
+            'sql'       => "text NULL",
+        ],
     ],
 ];
+
+if (null === EPostConfig::get(EPostConfig::WRITER_ATTACHMENTS_PATH)) {
+
+    unset($GLOBALS['TL_DCA'][$table]['metapalettes']['default']['attachments'][array_search(
+            'attachments_upload',
+            $GLOBALS['TL_DCA'][$table]['metapalettes']['default']['attachments']
+        )]);
+}

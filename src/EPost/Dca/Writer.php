@@ -12,7 +12,7 @@ namespace EPost\Dca;
 
 
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\ContaoBackendViewTemplate;
-use EPost\Api\Metadata\Envelope\Recipient\Hybrid;
+use EPost\Helper\HybridRecipientFactory;
 use EPost\Model\Letter;
 use EPost\Model\LetterContent;
 use EPost\Model\Template;
@@ -108,7 +108,10 @@ HTML;
 
         $switcher = sprintf('Datensatz Nr. %s von %u', $previewSwitcherInput->generate(), count($recipientMembers));
 
-        $pdf = $template->createLetterAsPdf($dc->id, Hybrid::createFromModel(\MemberModel::findByPk($previewMemberId)));
+        $pdf = $template->createLetterAsPdf(
+            $dc->id,
+            HybridRecipientFactory::createFromModel(\MemberModel::findByPk($previewMemberId))
+        );
         $pdf->Output(TL_ROOT.'/'.$pdfPath, 'F');
 
         // Embed pdf on localhost system

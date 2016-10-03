@@ -11,15 +11,15 @@ namespace EPost\Model;
 
 use Contao\Model;
 use EPost\Api\Metadata\Envelope\AbstractRecipient;
-use EPost\Api\Metadata\Envelope\Recipient;
+use EPost\Helper\HybridRecipientFactory;
 use Haste\Haste;
 
 
 /**
  * @property string $documentTpl
- * @property string $parseRecipient
- * @property string $parseSender
  * @property mixed  $margin
+ * @property string $color
+ * @property string $registered
  */
 class Template extends Model
 {
@@ -58,7 +58,9 @@ class Template extends Model
         require_once TL_ROOT.'/system/config/tcpdf.php';
 
         // Create new PDF document
-        $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
+//        $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
+        /** @var \FPDI|\TCPDF $pdf */
+        $pdf = new \FPDI(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
 
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
@@ -99,6 +101,16 @@ class Template extends Model
         // Write the HTML content
         $pdf->writeHTML($this->generateTemplate($letter, $tokens, $recipient), true, 0, true, 0);
 
+        // Import static attachments
+        foreach (deserialize($letter->attachments, true) as $attachment) {
+            $count = $pdf->setSourceFile(TL_ROOT.'/'.\FilesModel::findByPk($attachment)->path);
+
+            for ($i = 1; $i <= $count; $i++) {
+                $pdf->AddPage();
+                $pdf->useTemplate($pdf->importPage($i));
+            }
+        }
+
         $pdf->lastPage();
 
         return $pdf;
@@ -109,7 +121,7 @@ class Template extends Model
     {
         $tokens = [];
 
-        $sender = Recipient\Hybrid::createFromModel(\MemberModel::findById(54));
+        $sender = HybridRecipientFactory::createFromModel(\MemberModel::findById(54));
 
         foreach ($recipient::getConfigurableFields() as $field) {
             $tokens['recipient_'.$field] = $recipient->$field;

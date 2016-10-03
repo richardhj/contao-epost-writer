@@ -66,8 +66,8 @@ class EPostTemplate implements MessageTemplateInterface
                 // Set delivery options
                 $deliveryOptions = new DeliveryOptions();
                 $deliveryOptions
-//                    ->setRegistered($draft->getMessage()->epost_registered)
-//                    ->setColor($draft->getMessage()->epost_color)
+                    ->setRegistered($template->registered)
+                    ->setColor($template->color)
                     ->setCoverLetterIncluded();
 
                 $message->setDeliveryOptions($deliveryOptions);

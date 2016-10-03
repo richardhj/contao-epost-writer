@@ -114,7 +114,6 @@ class EPostTransport implements TransportInterface
 
             return new TransportStatus($message, 0, $message->getRecipients(), $e);
         }
-
     }
 
 
@@ -125,6 +124,5 @@ class EPostTransport implements TransportInterface
      */
     public function flush()
     {
-        $this->user->__destruct();
     }
 }

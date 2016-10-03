@@ -9,6 +9,9 @@
  */
 
 
+use EPost\Api\Metadata\DeliveryOptions;
+
+
 $table = EPost\Model\Template::getTable();
 
 
@@ -88,14 +91,18 @@ $GLOBALS['TL_DCA'][$table] = [
     // MetaPalettes
     'metapalettes' => [
         'default' => [
-            'title'    => [
-                'name',
+            'title'           => [
+                'title',
             ],
-            'template' => [
+            'template'        => [
                 'documentTpl',
                 'margin',
             ],
-            'expert'   => [
+            'deliveryOptions' => [
+                'color',
+                'registered',
+            ],
+            'expert'          => [
                 ':hide',
                 'parseSender',
             ],
@@ -218,6 +225,36 @@ TXT;
                 },
             ],
             'sql'           => "text NULL",
+        ],
+        'registered'    => [
+            'label'            => &$GLOBALS['TL_LANG'][$table]['registered'],
+            'exclude'          => true,
+            'inputType'        => 'select',
+            'options_callback' => function () {
+                return DeliveryOptions::getOptionsForRegistered();
+            },
+            'reference'        => &$GLOBALS['TL_LANG']['MSC']['epost']['registeredOptions'],
+            'default'          => DeliveryOptions::OPTION_REGISTERED_NO,
+            'eval'             => [
+                'mandatory' => true,
+                'tl_class'  => 'w50',
+            ],
+            'sql'              => "varchar(64) NOT NULL default ''",
+        ],
+        'color'         => [
+            'label'            => &$GLOBALS['TL_LANG'][$table]['color'],
+            'exclude'          => true,
+            'inputType'        => 'radio',
+            'options_callback' => function () {
+                return DeliveryOptions::getOptionsForColor();
+            },
+            'reference'        => &$GLOBALS['TL_LANG'][$table]['epost_colors'],
+            'default'          => DeliveryOptions::OPTION_COLOR_GRAYSCALE,
+            'eval'             => [
+                'mandatory' => true,
+                'tl_class'  => 'w50 clr',
+            ],
+            'sql'              => "varchar(64) NOT NULL default ''",
         ],
     ],
 ];

@@ -23,6 +23,7 @@ array_insert(
             'callback'   => 'EPost\Backend\Outbox',
             'icon'       => 'assets/epost/writer/images/outbox.png',
             'stylesheet' => 'assets/epost/writer/css/backend.css',
+            'nested'     => 'epost_components:tools',
         ],
     ]
 );
@@ -31,7 +32,14 @@ $GLOBALS['BE_MOD']['epost']['epost_templates'] = [
     'tables'     => [EPost\Model\Template::getTable()],
     'icon'       => 'assets/epost/writer/images/templates.png',
     'stylesheet' => 'assets/epost/writer/css/backend.css',
-    'nested'     => 'epost_config',
+    'nested'     => 'epost_components:config',
+];
+
+$GLOBALS['BE_MOD']['epost']['epost_writer_config'] = [
+    'tables'     => ['tl_epost_writer_config'],
+    'icon'       => 'assets/epost/writer/images/config.png',
+    'stylesheet' => 'assets/epost/writer/css/backend.css',
+    'nested'     => 'epost_components:config',
 ];
 
 /**

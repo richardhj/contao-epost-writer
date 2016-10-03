@@ -15,7 +15,9 @@ $table = EPost\Model\Letter::getTable();
 /**
  * Legends
  */
+$GLOBALS['TL_LANG'][$table]['title_legend'] = 'Allgemeine Einstellungen';
 $GLOBALS['TL_LANG'][$table]['recipients_legend'] = 'Empfänger';
+$GLOBALS['TL_LANG'][$table]['attachments_legend'] = 'Dateianhänge';
 
 
 /**
@@ -52,3 +54,7 @@ $GLOBALS['TL_LANG'][$table]['recipients_member_group'][0] = 'Mitgliedergruppen';
 $GLOBALS['TL_LANG'][$table]['recipients_member_group'][1] = '';
 $GLOBALS['TL_LANG'][$table]['recipients_member'][0] = 'Mitglieder';
 $GLOBALS['TL_LANG'][$table]['recipients_member'][1] = '';
+$GLOBALS['TL_LANG'][$table]['attachments'][0] = 'Anhänge';
+$GLOBALS['TL_LANG'][$table]['attachments'][1] = 'Wählen Sie die Anhänge aus, die dem Schreiben beigefügt werden sollen.';
+$GLOBALS['TL_LANG'][$table]['attachments_upload'][0] = 'Anhänge hochladen';
+$GLOBALS['TL_LANG'][$table]['attachments_upload'][1] = 'Laden Sie zusätzlich Anhänge hoch, die dem Schreiben beigefügt werden sollen.';
