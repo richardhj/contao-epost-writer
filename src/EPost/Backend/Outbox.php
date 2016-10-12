@@ -15,6 +15,10 @@ use Avisota\Queue\QueueInterface;
 use EPost\Helper\Config as EPostConfig;
 
 
+/**
+ * Class Outbox
+ * @package EPost\Backend
+ */
 class Outbox extends \BackendModule
 {
 
@@ -39,6 +43,9 @@ class Outbox extends \BackendModule
     }
 
 
+    /**
+     * Execute queue
+     */
     protected function executeQueue()
     {
         global $container;

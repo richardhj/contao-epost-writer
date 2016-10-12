@@ -17,12 +17,26 @@ use EPost\AvisotaBridge\Recipient\EPostDelegate;
 use EPost\Helper\HybridRecipientFactory;
 
 
+/**
+ * Class EPostWriter
+ * @package EPost\AvisotaBridge\RecipientSource
+ */
 class EPostWriter implements RecipientSourceInterface
 {
 
+    /**
+     * Member collection
+     *
+     * @var int[]
+     */
     protected $memberIds = [];
 
 
+    /**
+     * Member collection
+     *
+     * @var EPostDelegate[]
+     */
     protected $set = [];
 
 

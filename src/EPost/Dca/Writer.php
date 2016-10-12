@@ -18,6 +18,10 @@ use EPost\Model\LetterContent;
 use EPost\Model\Template;
 
 
+/**
+ * Class Writer
+ * @package EPost\Dca
+ */
 class Writer
 {
 

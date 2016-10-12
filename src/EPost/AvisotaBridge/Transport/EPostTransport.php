@@ -24,6 +24,10 @@ use GuzzleHttp\Exception\ClientException;
 use League\OAuth2\Client\Token\AccessToken;
 
 
+/**
+ * Class EPostTransport
+ * @package EPost\AvisotaBridge\Transport
+ */
 class EPostTransport implements TransportInterface
 {
 
@@ -39,6 +43,11 @@ class EPostTransport implements TransportInterface
     protected $token;
 
 
+    /**
+     * EPostTransport constructor.
+     *
+     * @param User $user
+     */
     public function __construct(User $user)
     {
         $this->user = $user;

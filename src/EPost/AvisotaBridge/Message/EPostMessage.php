@@ -16,6 +16,10 @@ use EPost\Api\Metadata\DeliveryOptions;
 use EPost\Api\Metadata\Envelope;
 
 
+/**
+ * Class EPostMessage
+ * @package EPost\AvisotaBridge\Message
+ */
 class EPostMessage implements MessageInterface
 {
 

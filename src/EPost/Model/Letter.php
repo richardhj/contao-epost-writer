@@ -33,6 +33,11 @@ class Letter extends Model
     protected static $strTable = 'tl_epost_letter';
 
 
+    /**
+     * Get all recipient member ids for this letter
+     *
+     * @return array
+     */
     public function getRecipientMemberIds()
     {
         $members = [];

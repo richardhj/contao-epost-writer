@@ -12,6 +12,10 @@ namespace EPost\Model;
 use Contao\Model;
 
 
+/**
+ * Class LetterContent
+ * @package EPost\Model
+ */
 class LetterContent extends Model
 {
 

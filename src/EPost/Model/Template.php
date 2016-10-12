@@ -262,6 +262,12 @@ class Template extends Model
     }
 
 
+    /**
+     * Add the raw recipient and parsed recipient to template
+     *
+     * @param AbstractRecipient $recipient
+     * @param \FrontendTemplate $template
+     */
     protected function addRecipientToTemplate(AbstractRecipient $recipient, \FrontendTemplate &$template)
     {
         $addressTemplate = new \FrontendTemplate('epost_addressblock_recipient');

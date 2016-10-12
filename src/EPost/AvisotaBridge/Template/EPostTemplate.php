@@ -21,6 +21,10 @@ use EPost\Model\Letter;
 use EPost\Model\Template;
 
 
+/**
+ * Class EPostTemplate
+ * @package EPost\AvisotaBridge\Template
+ */
 class EPostTemplate implements MessageTemplateInterface
 {
 

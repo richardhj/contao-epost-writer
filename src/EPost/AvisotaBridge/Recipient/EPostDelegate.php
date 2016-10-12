@@ -16,6 +16,10 @@ use EPost\Api\Metadata\Envelope\AbstractRecipient;
 use EPost\Api\Metadata\Envelope\Recipient\Normal;
 
 
+/**
+ * Class EPostDelegate
+ * @package EPost\AvisotaBridge\Recipient
+ */
 class EPostDelegate implements RecipientInterface
 {
 
