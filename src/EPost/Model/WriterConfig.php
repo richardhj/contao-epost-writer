@@ -33,10 +33,4 @@ class WriterConfig extends AbstractSingleModel
      * {@inheritdoc}
      */
     protected static $objInstance;
-
-
-    public static function getInstance()
-    {
-        return new self();
-    }
 }
