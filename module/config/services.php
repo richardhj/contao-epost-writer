@@ -19,8 +19,8 @@
  */
 use Avisota\Queue\SimpleDatabaseQueue;
 use EPost\AvisotaBridge\Transport\EPostTransport;
-use EPost\Helper\Config as EPostConfig;
 use EPost\Model\User;
+use EPost\Model\WriterConfig;
 
 
 /** @var Pimple $container */
@@ -33,6 +33,6 @@ $container['avisota.queue.epost-writer'] = $container->share(
 
 $container['avisota.transport.epost-writer'] = $container->share(
     function ($container) {
-        return new EPostTransport(User::findByPk(EPostConfig::get(EPostConfig::TRANSPORT_USER)));
+        return new EPostTransport(User::findByPk(WriterConfig::getInstance()->transport_user));
     }
 );

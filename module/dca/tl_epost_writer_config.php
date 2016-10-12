@@ -8,21 +8,25 @@
  * @author  Richard Henkenjohann <richard-epost@henkenjohann.me>
  */
 
-use EPost\Helper\Config;
+use EPost\Model\WriterConfig;
 
 
-$table = 'tl_epost_writer_config';
+$table = WriterConfig::getTable();
 
 $GLOBALS['TL_DCA'][$table] = [
-
     // Config
-    'config'       => [
+    'config' => [
         'dataContainer' => 'General',
-        'sql'           => [
-            'keys' => [
-                'key' => 'primary',
+        'forceEdit'     => true,
+    ],
+
+    'dca_config'   => [
+        'data_provider' => [
+            'default' => [
+                'class' => 'DcGeneral\Data\SingleModelDataProvider',
             ],
         ],
+        'view'          => 'DcGeneral\View\SingleModelView',
     ],
 
     // Metapalettes
@@ -30,44 +34,44 @@ $GLOBALS['TL_DCA'][$table] = [
         [
             'default' => [
                 'transport' => [
-                    Config::TRANSPORT_USER,
+                    'transport_user',
                 ],
                 'queue'     => [
-                    Config::QUEUE_CYCLE_PAUSE,
-                    Config::QUEUE_MAX_SEND_COUNT,
-                    Config::QUEUE_MAX_SEND_TIME,
+                    'queue_cycle_pause',
+                    'queue_max_send_count',
+                    'queue_max_send_time',
                 ],
             ],
         ],
 
     // Fields
     'fields'       => [
-        Config::TRANSPORT_USER       => [
-            'label'     => &$GLOBALS['TL_LANG'][$table][Config::TRANSPORT_USER],
+        'transport_user'       => [
+            'label'     => &$GLOBALS['TL_LANG'][$table]['transport_user'],
             'inputType' => 'text',
             'eval'      => [
                 'mandatory' => true,
                 'tl_class'  => 'w50',
             ],
         ],
-        Config::QUEUE_CYCLE_PAUSE    => [
-            'label'     => &$GLOBALS['TL_LANG'][$table][Config::QUEUE_CYCLE_PAUSE],
+        'queue_cycle_pause'    => [
+            'label'     => &$GLOBALS['TL_LANG'][$table]['queue_cycle_pause'],
             'inputType' => 'text',
             'eval'      => [
                 'mandatory' => true,
                 'tl_class'  => 'w50',
             ],
         ],
-        Config::QUEUE_MAX_SEND_COUNT => [
-            'label'     => &$GLOBALS['TL_LANG'][$table][Config::QUEUE_MAX_SEND_COUNT],
+        'queue_max_send_count' => [
+            'label'     => &$GLOBALS['TL_LANG'][$table]['queue_max_send_count'],
             'inputType' => 'text',
             'eval'      => [
                 'mandatory' => true,
                 'tl_class'  => 'w50',
             ],
         ],
-        Config::QUEUE_MAX_SEND_TIME  => [
-            'label'     => &$GLOBALS['TL_LANG'][$table][Config::QUEUE_MAX_SEND_TIME],
+        'queue_max_send_time'  => [
+            'label'     => &$GLOBALS['TL_LANG'][$table]['queue_max_send_time'],
             'inputType' => 'text',
             'eval'      => [
                 'mandatory' => true,

@@ -9,9 +9,9 @@
  */
 
 
-use EPost\Helper\Config as EPostConfig;
 use EPost\Model\Letter;
 use EPost\Model\Template;
+use EPost\Model\WriterConfig;
 
 
 $table = EPost\Model\Letter::getTable();
@@ -273,8 +273,8 @@ $GLOBALS['TL_DCA'][$table] = [
             'inputType' => 'fileUpload',
             'eval'      => [
                 'tl_class'     => 'w50',
-                'uploadFolder' => EPostConfig::get(EPostConfig::WRITER_ATTACHMENTS_PATH)
-                    ? FilesModel::findByPk(EPostConfig::get(EPostConfig::WRITER_ATTACHMENTS_PATH))->path
+                'uploadFolder' => WriterConfig::getInstance()->writer_attachments_path
+                    ? FilesModel::findByPk(WriterConfig::getInstance()->writer_attachments_path)->path
                     : null,
             ],
             'sql'       => "text NULL",
@@ -282,7 +282,7 @@ $GLOBALS['TL_DCA'][$table] = [
     ],
 ];
 
-if (null === EPostConfig::get(EPostConfig::WRITER_ATTACHMENTS_PATH)) {
+if (null === WriterConfig::getInstance()->writer_attachments_path) {
 
     unset($GLOBALS['TL_DCA'][$table]['metapalettes']['default']['attachments'][array_search(
             'attachments_upload',
