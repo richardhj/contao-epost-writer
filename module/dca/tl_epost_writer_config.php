@@ -8,10 +8,8 @@
  * @author  Richard Henkenjohann <richard-epost@henkenjohann.me>
  */
 
-use EPost\Model\WriterConfig;
 
-
-$table = WriterConfig::getTable();
+$table = EPost\Model\WriterConfig::getTable();
 
 $GLOBALS['TL_DCA'][$table] = [
     // Config
@@ -41,20 +39,29 @@ $GLOBALS['TL_DCA'][$table] = [
                     'queue_max_send_count',
                     'queue_max_send_time',
                 ],
+                'writer'    => [
+                    'writer_attachments_path',
+                ],
             ],
         ],
 
     // Fields
     'fields'       => [
-        'transport_user'       => [
-            'label'     => &$GLOBALS['TL_LANG'][$table]['transport_user'],
-            'inputType' => 'text',
-            'eval'      => [
-                'mandatory' => true,
-                'tl_class'  => 'w50',
+        'transport_user'          => [
+            'label'            => &$GLOBALS['TL_LANG'][$table]['transport_user'],
+            'inputType'        => 'select',
+            'options_callback' => function () {
+                $users = EPost\Model\User::findAll();
+
+                return (null !== $users) ? $users->fetchEach('title') : [];
+            },
+            'eval'             => [
+                'mandatory'          => true,
+                'includeBlankOption' => true,
+                'tl_class'           => 'w50',
             ],
         ],
-        'queue_cycle_pause'    => [
+        'queue_cycle_pause'       => [
             'label'     => &$GLOBALS['TL_LANG'][$table]['queue_cycle_pause'],
             'inputType' => 'text',
             'eval'      => [
@@ -62,7 +69,7 @@ $GLOBALS['TL_DCA'][$table] = [
                 'tl_class'  => 'w50',
             ],
         ],
-        'queue_max_send_count' => [
+        'queue_max_send_count'    => [
             'label'     => &$GLOBALS['TL_LANG'][$table]['queue_max_send_count'],
             'inputType' => 'text',
             'eval'      => [
@@ -70,11 +77,19 @@ $GLOBALS['TL_DCA'][$table] = [
                 'tl_class'  => 'w50',
             ],
         ],
-        'queue_max_send_time'  => [
+        'queue_max_send_time'     => [
             'label'     => &$GLOBALS['TL_LANG'][$table]['queue_max_send_time'],
             'inputType' => 'text',
             'eval'      => [
                 'mandatory' => true,
+                'tl_class'  => 'w50',
+            ],
+        ],
+        'writer_attachments_path' => [
+            'label'     => &$GLOBALS['TL_LANG'][$table]['writer_attachments_path'],
+            'inputType' => 'fileTree',
+            'eval'      => [
+                'fieldType' => 'radio',
                 'tl_class'  => 'w50',
             ],
         ],
