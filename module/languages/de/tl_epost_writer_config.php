@@ -32,6 +32,6 @@ $GLOBALS['TL_LANG'][$table]['queue_cycle_pause'][1] = 'Bitte geben Sie die Zeit 
 $GLOBALS['TL_LANG'][$table]['queue_max_send_count'][0] = 'Anzahl der Sendungen';
 $GLOBALS['TL_LANG'][$table]['queue_max_send_count'][1] = 'Bitte geben Sie die maximale Anzahl an Sendungen an, die für den Sendezyklus gilt.';
 $GLOBALS['TL_LANG'][$table]['queue_max_send_time'][0] = 'Sendedauer';
-$GLOBALS['TL_LANG'][$table]['queue_max_send_time'][1] = 'Bitte geben Sie die Zeit in Sekunden an, die zwischen den Sendezyklen liegen soll.';
+$GLOBALS['TL_LANG'][$table]['queue_max_send_time'][1] = 'Bitte geben Sie die Maximaldauer in Sekunden an, die dann für jeden Sendezyklus gilt.';
 $GLOBALS['TL_LANG'][$table]['writer_attachments_path'][0] = 'Anhänge-Pfad';
 $GLOBALS['TL_LANG'][$table]['writer_attachments_path'][1] = 'Wählen Sie einen Ordner aus, in dem die Anhänge automatisch hochgeladen werden sollen.';
