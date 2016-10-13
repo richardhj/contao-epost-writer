@@ -12,7 +12,7 @@ namespace EPost\Backend;
 
 
 use Avisota\Queue\QueueInterface;
-use EPost\Helper\Config as EPostConfig;
+use EPost\Model\WriterConfig;
 
 
 /**
@@ -64,8 +64,8 @@ class Outbox extends \BackendModule
 
         if ('execute' === \Input::get('action')) {
             $this->Template->execute = true;
-            $this->Template->queue_maxSendTime = json_encode(EPostConfig::get(EPostConfig::QUEUE_MAX_SEND_TIME));
-            $this->Template->queue_cyclePause = json_encode(EPostConfig::get(EPostConfig::QUEUE_CYCLE_PAUSE));
+            $this->Template->queue_maxSendTime = json_encode(WriterConfig::getInstance()->queue_max_send_time);
+            $this->Template->queue_cyclePause = json_encode(WriterConfig::getInstance()->queue_cycle_pause);
 
             $GLOBALS['TL_CSS'][] = 'assets/epost/writer/css/be_outbox.css';
             $GLOBALS['TL_JAVASCRIPT'][] = 'assets/epost/writer/js/Number.js';

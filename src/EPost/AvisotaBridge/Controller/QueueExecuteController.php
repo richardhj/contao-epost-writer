@@ -18,7 +18,7 @@ namespace EPost\AvisotaBridge\Controller;
 use Avisota\Queue\ExecutionConfig;
 use Avisota\Queue\QueueInterface;
 use Avisota\Transport\TransportInterface;
-use EPost\Helper\Config as EPostConfig;
+use EPost\Model\WriterConfig;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -81,11 +81,11 @@ class QueueExecuteController extends \Backend
 
         $config = new ExecutionConfig();
 
-        if (EPostConfig::get(EPostConfig::QUEUE_MAX_SEND_TIME) > 0) {
-            $config->setTimeLimit(EPostConfig::get(EPostConfig::QUEUE_MAX_SEND_TIME));
+        if (WriterConfig::getInstance()->queue_max_send_time > 0) {
+            $config->setTimeLimit(WriterConfig::getInstance()->queue_max_send_time);
         }
-        if (EPostConfig::get(EPostConfig::QUEUE_MAX_SEND_COUNT) > 0) {
-            $config->setMessageLimit(EPostConfig::get(EPostConfig::QUEUE_MAX_SEND_COUNT));
+        if (WriterConfig::getInstance()->queue_max_send_count > 0) {
+            $config->setMessageLimit(WriterConfig::getInstance()->queue_max_send_count);
         }
 
         /** @var TransportInterface $transport */
