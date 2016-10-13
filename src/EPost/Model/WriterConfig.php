@@ -10,6 +10,8 @@
 
 namespace EPost\Model;
 
+use DcGeneral\Contao\Model\AbstractSingleModel;
+
 
 /**
  * Class WriterConfig
